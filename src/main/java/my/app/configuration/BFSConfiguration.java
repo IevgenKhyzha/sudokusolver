@@ -1,6 +1,6 @@
 package my.app.configuration;
 
-import my.app.configuration.beans.BreadthFirstAlgorithm;
+import my.app.beans.BreadthFirstAlgorithm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

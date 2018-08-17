@@ -1,6 +1,6 @@
 package my.app;
 
-import my.app.configuration.beans.Algorithm;
+import my.app.beans.Algorithm;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -15,7 +15,7 @@ public class Application {
     public static void main(String[] args) {
         ArgsValues argsValues;
         if (args.length == 0) {
-            argsValues = new ArgsValues("/Users/eugenkhyzha/Documents/sudoku_in_un_all.txt","/Users/eugenkhyzha/Documents/sudokuout.html", "UNAMBIGUOUS");
+            argsValues = new ArgsValues("/Users/eugenkhyzha/Documents/sudoku_in_un_1cell.txt","/Users/eugenkhyzha/Documents/sudokuout.html", "UNAMBIGUOUS");//sudoku_in_un_all.txt
         } else {
             argsValues = getValuesFromArgs(args);
         }
