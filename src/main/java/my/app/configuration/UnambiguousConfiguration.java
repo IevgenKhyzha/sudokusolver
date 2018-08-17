@@ -1,6 +1,6 @@
 package my.app.configuration;
 
-import my.app.configuration.beans.Unambiguous;
+import my.app.beans.Unambiguous;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

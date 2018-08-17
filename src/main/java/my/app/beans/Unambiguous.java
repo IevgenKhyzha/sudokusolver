@@ -1,9 +1,14 @@
-package my.app.configuration.beans;
+package my.app.beans;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Unambiguous extends Algorithm {
+
+    @Override
+    public String getAlgorithmName() {
+        return "Unambiguous";
+    }
 
     public int[][] resolvePuzzle(int[][] sudokuPuzzle) {
         int tryCount = 0;
@@ -18,7 +23,7 @@ public class Unambiguous extends Algorithm {
                         list.clear();
                         for (int possibleValue = 1; possibleValue <= 9; possibleValue++) {
                             tryCount++;
-                            if (!findEverywthere(possibleValue, sudokuPuzzle, i, j)) {
+                            if (!findInAllPossiblePlaces(possibleValue, sudokuPuzzle, i, j)) {
                                 list.add(possibleValue);
                             }
                         }
