@@ -1,6 +1,12 @@
 package my.app.beans;
 
+import java.util.List;
+
 public abstract class Algorithm {
+
+    protected int tryCount = 0;
+    protected int lapsCount = 0;
+    protected int fidingValuesCount = 0;
 
     public abstract String getAlgorithmName();
 
@@ -41,5 +47,51 @@ public abstract class Algorithm {
 
     protected boolean isPresentInCell(int[][] sudokuPuzzle, int i, int j) {
         return sudokuPuzzle[i][j] != 0;
+    }
+
+    protected boolean findUnambiguousInCell(int[][] sudokuPuzzle, List<Integer> possibleValuesList, int i, int j) {
+        boolean findUnambiguousInCell = false;
+        possibleValuesList.clear();
+        for (int possibleValue = 1; possibleValue <= 9; possibleValue++) {
+            tryCount++;
+            if (!findInAllPossiblePlaces(possibleValue, sudokuPuzzle, i, j)) {
+                possibleValuesList.add(possibleValue);
+            }
+        }
+        if (possibleValuesList.size() == 1) {
+            sudokuPuzzle[i][j] = possibleValuesList.get(0);
+            findUnambiguousInCell = true;
+            possibleValuesList.clear();
+            fidingValuesCount++;
+        }
+        return findUnambiguousInCell;
+    }
+
+    public boolean isAlgorithmSolvedPuzzle(int[][] sudokuArray) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (sudokuArray[i][j] == 0 | checkValueInOtherPossiblePlases(sudokuArray[i][j], sudokuArray, i, j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean checkValueInOtherPossiblePlases(int findingValue, int[][] sudokuArray, int i, int j) {
+        // TODO
+        return false;
+    }
+
+    protected boolean isTheSameValuePresentInPossiblePlace_checkInAllPuzzle(int[][] sudokuPuzzle) {
+        for (int i = 0; i < sudokuPuzzle.length; i++) {
+            for (int j = 0; j < sudokuPuzzle[i].length; j++) {
+                if (!isPresentInCell(sudokuPuzzle, i, j)) {
+                    checkValueInOtherPossiblePlases(sudokuPuzzle[i][j], sudokuPuzzle, i, j);
+                }
+            }
+        }
+
+        return true;
     }
 }

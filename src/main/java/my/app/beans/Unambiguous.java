@@ -10,32 +10,52 @@ public class Unambiguous extends Algorithm {
         return "Unambiguous";
     }
 
+    @Override
+//    public int[][] resolvePuzzle(int[][] sudokuPuzzle) {
+//        boolean findUnambiguous = true; // if find, try one more time in every cell
+//        List<Integer> possibleValuesList = new ArrayList<Integer>();
+//        while(findUnambiguous) {
+//            findUnambiguous = false;
+//            // for variable to change some value in puzzle
+//            for (int i = 0; i < sudokuPuzzle.length; i++) {
+//                for (int j = 0; j < sudokuPuzzle[i].length; j++) {
+//                    if (!isPresentInCell(sudokuPuzzle, i, j)) {
+//                        possibleValuesList.clear();
+//                        for (int possibleValue = 1; possibleValue <= 9; possibleValue++) {
+//                            tryCount++;
+//                            if (!findInAllPossiblePlaces(possibleValue, sudokuPuzzle, i, j)) {
+//                                possibleValuesList.add(possibleValue);
+//                            }
+//                        }
+//                        if (possibleValuesList.size() == 1) {
+//                            sudokuPuzzle[i][j] = possibleValuesList.get(0);
+//                            findUnambiguous = true;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        System.out.println("Number of try: " + tryCount);
+//        return sudokuPuzzle;
+//    }
+
     public int[][] resolvePuzzle(int[][] sudokuPuzzle) {
-        int tryCount = 0;
-        boolean findUn = true; // if find, try one more time in every cell
-        List<Integer> list = new ArrayList<Integer>();
-        while(findUn) {
-            findUn = false;
-            // for variable to change some value in puzzle
+        boolean findUnambiguousInPuzzle = true; // if find, try one more time in every cell
+        List<Integer> possibleValuesList = new ArrayList<Integer>();
+        while(findUnambiguousInPuzzle) {
+            findUnambiguousInPuzzle = false;
+            lapsCount++;
             for (int i = 0; i < sudokuPuzzle.length; i++) {
                 for (int j = 0; j < sudokuPuzzle[i].length; j++) {
                     if (!isPresentInCell(sudokuPuzzle, i, j)) {
-                        list.clear();
-                        for (int possibleValue = 1; possibleValue <= 9; possibleValue++) {
-                            tryCount++;
-                            if (!findInAllPossiblePlaces(possibleValue, sudokuPuzzle, i, j)) {
-                                list.add(possibleValue);
-                            }
-                        }
-                        if (list.size() == 1) {
-                            sudokuPuzzle[i][j] = list.get(0);
-                            findUn = true;
-                        }
+                        findUnambiguousInPuzzle |= findUnambiguousInCell(sudokuPuzzle, possibleValuesList, i, j);
                     }
                 }
             }
         }
         System.out.println("Number of try: " + tryCount);
+        System.out.println("Number of laps: " + lapsCount);
+        System.out.println("Number of finding values: " + fidingValuesCount);
         return sudokuPuzzle;
     }
 }
