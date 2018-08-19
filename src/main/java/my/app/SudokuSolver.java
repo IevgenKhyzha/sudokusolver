@@ -14,7 +14,7 @@ public class SudokuSolver {
         Date dateBegin = new Date();
         int[][] resolvedPuzzle = algorithm.resolvePuzzle(sudokuInArray);
         Date dateEnd = new Date();
-        System.out.println("Puzzle was " +  printIsResolved(isAlgorithmSolvedPuzzle(resolvedPuzzle)) + " by " + algorithm.getAlgorithmName() + " algorithm");
+        System.out.println("Puzzle was " +  printIsResolved(algorithm.isAlgorithmSolvedPuzzle(resolvedPuzzle)) + " by " + algorithm.getAlgorithmName() + " algorithm");
         printTime(dateBegin, dateEnd);
         printArray(resolvedPuzzle);
         fileUtils.createOutPutFile(resolvedPuzzle);
@@ -50,17 +50,5 @@ public class SudokuSolver {
 
     private String printIsResolved(boolean isResolved) {
         return isResolved ? "resolved" : "not resolved";
-    }
-
-    private boolean isAlgorithmSolvedPuzzle(int[][] sudokuArray) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (sudokuArray[i][j] == 0) {
-                    return false;
-                }
-            }
-        }
-        // TODO: is algorithm solved right controller ???
-        return true;
     }
 }

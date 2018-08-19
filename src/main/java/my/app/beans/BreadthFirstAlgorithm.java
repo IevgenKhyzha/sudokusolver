@@ -7,6 +7,7 @@ public class BreadthFirstAlgorithm extends Algorithm {
         return "BFS";
     }
 
+    @Override
     public int[][] resolvePuzzle(int[][] sudokuPuzzle) {
         return null;
     }
