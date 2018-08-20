@@ -70,16 +70,44 @@ public abstract class Algorithm {
     public boolean isAlgorithmSolvedPuzzle(int[][] sudokuArray) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (sudokuArray[i][j] == 0 | checkValueInOtherPossiblePlases(sudokuArray[i][j], sudokuArray, i, j)) {
+                if (sudokuArray[i][j] == 0 | checkInAllPossiblePlases(sudokuArray[i][j], sudokuArray, i, j)) {
                     return false;
                 }
             }
         }
         return true;
     }
+    // TODO: find and check. reload one method with excluding parameter
+    private boolean checkInAllPossiblePlases(int findingValue, int[][] sudokuArray, int i, int j) {
+        return checkInRow(findingValue, sudokuArray, i, j) | checkInColumn(findingValue, sudokuArray, i, j) | checkInSquare(findingValue, sudokuArray, i, j) ;
+    }
 
-    private boolean checkValueInOtherPossiblePlases(int findingValue, int[][] sudokuArray, int i, int j) {
-        // TODO
+    private boolean checkInRow(int searchingValue, int[][] sudokuPuzzle, int rowNumber, int columnNumber) {
+        for (int j = 0; j < sudokuPuzzle[rowNumber].length; j++) {
+            if (sudokuPuzzle[rowNumber][j] == searchingValue || j != columnNumber) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkInColumn(int searchingValue, int[][] sudokuPuzzle, int rowNumber, int columnNumber) {
+        for (int i = 0; i < sudokuPuzzle.length; i++) {
+            if (sudokuPuzzle[i][columnNumber] == searchingValue || i != rowNumber) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkInSquare(int searchingValue, int[][] sudokuPuzzle, int rowNumber, int columnNumber) {
+        for (int i = 3 * (rowNumber / 3); i <= 3 * (rowNumber / 3) + 2; i++) {
+            for (int j = 3 * (columnNumber / 3); j <= 3 * (columnNumber / 3) + 2; j++) {
+                if (sudokuPuzzle[i][j] == searchingValue || i != rowNumber || j != columnNumber) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -87,11 +115,10 @@ public abstract class Algorithm {
         for (int i = 0; i < sudokuPuzzle.length; i++) {
             for (int j = 0; j < sudokuPuzzle[i].length; j++) {
                 if (!isPresentInCell(sudokuPuzzle, i, j)) {
-                    checkValueInOtherPossiblePlases(sudokuPuzzle[i][j], sudokuPuzzle, i, j);
+                    checkInAllPossiblePlases(sudokuPuzzle[i][j], sudokuPuzzle, i, j);
                 }
             }
         }
-
-        return true;
+        return false;
     }
 }
