@@ -1,6 +1,6 @@
 package my.app;
 
-import my.app.beans.Algorithm;
+import my.app.algorithmbeans.Algorithm;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

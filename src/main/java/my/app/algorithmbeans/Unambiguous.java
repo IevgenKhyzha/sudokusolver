@@ -1,4 +1,4 @@
-package my.app.beans;
+package my.app.algorithmbeans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,14 @@ public class Unambiguous extends Algorithm {
             for (int i = 0; i < sudokuPuzzle.length; i++) {
                 for (int j = 0; j < sudokuPuzzle[i].length; j++) {
                     if (!isPresentInCell(sudokuPuzzle, i, j)) {
-                        findUnambiguousInPuzzle |= findUnambiguousInCell(sudokuPuzzle, possibleValuesList, i, j);
+                        findUnambiguousInPuzzle |= findUnambiguousForCell(sudokuPuzzle, i, j, possibleValuesList);
                     }
                 }
             }
         }
         System.out.println("Number of try: " + tryCount);
         System.out.println("Number of laps: " + lapsCount);
-        System.out.println("Number of finding values: " + fidingValuesCount);
+        System.out.println("Number of finding values: " + findingValuesCount);
         return sudokuPuzzle;
     }
 }

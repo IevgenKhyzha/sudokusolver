@@ -1,14 +1,14 @@
-package my.app.beans;
+package my.app.algorithmbeans;
 
-public class BreadthFirstAlgorithm extends Algorithm {
+public class MarinaAlgorithm extends Algorithm {
 
     @Override
     public String getAlgorithmName() {
-        return "BFS";
+        return "Marina";
     }
 
     @Override
     public int[][] resolvePuzzle(int[][] sudokuPuzzle) {
-        return null;
+        return new int[0][];
     }
 }

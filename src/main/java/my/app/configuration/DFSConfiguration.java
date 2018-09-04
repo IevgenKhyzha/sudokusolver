@@ -1,6 +1,6 @@
 package my.app.configuration;
 
-import my.app.beans.DepthFirstAlgorithm;
+import my.app.algorithmbeans.DepthFirstAlgorithm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
