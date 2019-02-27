@@ -13,6 +13,28 @@ public abstract class Algorithm {
 
     public abstract int[][] resolvePuzzle(int[][] sudokuPuzzle);
 
+    public int[] findFirstEmptyCellInPuzzleAndReturnCoordinates(int[][] sudokuPuzzle) {
+        for (int i = 0; i < sudokuPuzzle.length; i++) {
+            for (int j = 0; j < sudokuPuzzle[i].length; j++) {
+                if(sudokuPuzzle[i][j] == 0) {
+                    return new int[]{i,j};
+                }
+            }
+        }
+        return null;
+    }
+
+    public int[] findFirstEmptyCellInPuzzleAndReturnCoordinates(int[][] sudokuPuzzle, int i, int j) { // todo
+        for (int ii = i; ii < sudokuPuzzle.length; ii++) {
+            for (int jj = j; jj < sudokuPuzzle[ii].length; jj++) {
+                if(sudokuPuzzle[ii][jj] == 0) {
+                    return new int[]{ii,jj};
+                }
+            }
+        }
+        return null;
+    }
+
     private boolean findInSquare(int searchingValue, int[][] sudokuPuzzle, int rowNumber, int columnNumber) {
         for (int i = 3 * (rowNumber / 3); i <= 3 * (rowNumber / 3) + 2; i++) {
             for (int j = 3 * (columnNumber / 3); j <= 3 * (columnNumber / 3) + 2; j++) {
@@ -90,8 +112,8 @@ public abstract class Algorithm {
 
     // methods for check puzzle right resolving
     public boolean isAlgorithmSolvedPuzzle(int[][] sudokuArray) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < sudokuArray.length; i++) {
+            for (int j = 0; j < sudokuArray[i].length; j++) {
                 if (sudokuArray[i][j] == 0 | checkInAllPossiblePlases(sudokuArray[i][j], sudokuArray, i, j)) {
                     return false;
                 }
@@ -146,5 +168,13 @@ public abstract class Algorithm {
 
     protected boolean isPresentInCell(int[][] sudokuPuzzle, int i, int j) {
         return sudokuPuzzle[i][j] != 0;
+    }
+
+    protected int[][] cloneSudokuPuzzle(int[][] sudokuPuzzle) {
+        int[][] clonedPuzzle = sudokuPuzzle.clone();
+        for (int i = 0; i < clonedPuzzle.length; i++){
+            clonedPuzzle[i] = sudokuPuzzle[i].clone();
+        }
+        return clonedPuzzle;
     }
 }
