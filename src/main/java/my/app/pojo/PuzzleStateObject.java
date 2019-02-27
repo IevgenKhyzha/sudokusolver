@@ -5,24 +5,30 @@ import java.util.Stack;
 public class PuzzleStateObject {
 
     private int[][] sudokuPuzzle;
-    private int[] cellCoordinates;
-    private Stack possibleValues;
+    private Stack<Integer> possibleValues;
+    private int ii;
+    private int jj;
 
-    public PuzzleStateObject(int[][] sudokuPuzzle, int[] cellCoordinates, Stack possibleValuesList) {
+    public PuzzleStateObject(int[][] sudokuPuzzle, Stack<Integer> possibleValues, int ii, int jj) {
         this.sudokuPuzzle = sudokuPuzzle;
-        this.cellCoordinates = cellCoordinates;
-        this.possibleValues = possibleValuesList;
+        this.possibleValues = possibleValues;
+        this.ii = ii;
+        this.jj = jj;
     }
 
     public int[][] getSudokuPuzzle() {
         return sudokuPuzzle;
     }
 
-    public int[] getCellCoordinates() {
-        return cellCoordinates;
+    public Stack<Integer> getPossibleValues() {
+        return possibleValues;
     }
 
-    public Stack getPossibleValues() {
-        return possibleValues;
+    public int getIi() {
+        return ii;
+    }
+
+    public int getJj() {
+        return jj;
     }
 }
