@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sudoku Solver</title>
+<!--todo finish table-->
+        <style>
+            table {
+                width: 20%;
+            }
+            td , div {
+                width: 11.11%;
+                position: center;
+            }
+            td:after {
+                content: '';
+                display: block;
+                margin-top: 100%;
+            }
+            td .content {
+                position: center;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                /*background: gold;*/
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td ${s00}><div class="content">${00}</div></td>
+                <td ${s01}><div class="content">${01}</div></td>
+                <td ${s02}><div class="content">${02}</div></td>
+                <td ${s03}><div class="content">${03}</div></td>
+                <td ${s04}><div class="content">${04}</div></td>
+                <td ${s05}><div class="content">${05}</div></td>
+                <td ${s06}><div class="content">${06}</div></td>
+                <td ${s07}><div class="content">${07}</div></td>
+                <td ${s08}><div class="content">${08}</div></td>
+            </tr>
+            <tr>
+                <td ${s10}><div class="content">${10}</div></td>
+                <td ${s11}><div class="content">${11}</div></td>
+                <td ${s12}><div class="content">${12}</div></td>
+                <td ${s13}><div class="content">${13}</div></td>
+                <td ${s14}><div class="content">${14}</div></td>
+                <td ${s15}><div class="content">${15}</div></td>
+                <td ${s16}><div class="content">${16}</div></td>
+                <td ${s17}><div class="content">${17}</div></td>
+                <td ${s18}><div class="content">${18}</div></td>
+            </tr>
+            <tr>
+                <td ${s20}><div class="content">${20}</div></td>
+                <td ${s21}><div class="content">${21}</div></td>
+                <td ${s22}><div class="content">${22}</div></td>
+                <td ${s23}><div class="content">${23}</div></td>
+                <td ${s24}><div class="content">${24}</div></td>
+                <td ${s25}><div class="content">${25}</div></td>
+                <td ${s26}><div class="content">${26}</div></td>
+                <td ${s27}><div class="content">${27}</div></td>
+                <td ${s28}><div class="content">${28}</div></td>
+            </tr>
+            <tr>
+                <td ${s30}><div class="content">${30}</div></td>
+                <td ${s31}><div class="content">${31}</div></td>
+                <td ${s32}><div class="content">${32}</div></td>
+                <td ${s33}><div class="content">${33}</div></td>
+                <td ${s34}><div class="content">${34}</div></td>
+                <td ${s35}><div class="content">${35}</div></td>
+                <td ${s36}><div class="content">${36}</div></td>
+                <td ${s37}><div class="content">${37}</div></td>
+                <td ${s38}><div class="content">${38}</div></td>
+            </tr>
+            <tr>
+                <td ${s40}><div class="content">${40}</div></td>
+                <td ${s41}><div class="content">${41}</div></td>
+                <td ${s42}><div class="content">${42}</div></td>
+                <td ${s43}><div class="content">${43}</div></td>
+                <td ${s44}><div class="content">${44}</div></td>
+                <td ${s45}><div class="content">${45}</div></td>
+                <td ${s46}><div class="content">${46}</div></td>
+                <td ${s47}><div class="content">${47}</div></td>
+                <td ${s48}><div class="content">${48}</div></td>
+            </tr>
+            <tr>
+                <td ${s50}><div class="content">${50}</div></td>
+                <td ${s51}><div class="content">${51}</div></td>
+                <td ${s52}><div class="content">${52}</div></td>
+                <td ${s53}><div class="content">${53}</div></td>
+                <td ${s54}><div class="content">${54}</div></td>
+                <td ${s55}><div class="content">${55}</div></td>
+                <td ${s56}><div class="content">${56}</div></td>
+                <td ${s57}><div class="content">${57}</div></td>
+                <td ${s58}><div class="content">${58}</div></td>
+            </tr>
+            <tr>
+                <td ${s60}><div class="content">${60}</div></td>
+                <td ${s61}><div class="content">${61}</div></td>
+                <td ${s62}><div class="content">${62}</div></td>
+                <td ${s63}><div class="content">${63}</div></td>
+                <td ${s64}><div class="content">${64}</div></td>
+                <td ${s65}><div class="content">${65}</div></td>
+                <td ${s66}><div class="content">${66}</div></td>
+                <td ${s67}><div class="content">${67}</div></td>
+                <td ${s68}><div class="content">${68}</div></td>
+            </tr>
+            <tr>
+                <td ${s70}><div class="content">${70}</div></td>
+                <td ${s71}><div class="content">${71}</div></td>
+                <td ${s72}><div class="content">${72}</div></td>
+                <td ${s73}><div class="content">${73}</div></td>
+                <td ${s74}><div class="content">${74}</div></td>
+                <td ${s75}><div class="content">${75}</div></td>
+                <td ${s76}><div class="content">${76}</div></td>
+                <td ${s77}><div class="content">${77}</div></td>
+                <td ${s78}><div class="content">${78}</div></td>
+            </tr>
+            <tr>
+                <td ${s80}><div class="content">${80}</div></td>
+                <td ${s81}><div class="content">${81}</div></td>
+                <td ${s82}><div class="content">${82}</div></td>
+                <td ${s83}><div class="content">${83}</div></td>
+                <td ${s84}><div class="content">${84}</div></td>
+                <td ${s85}><div class="content">${85}</div></td>
+                <td ${s86}><div class="content">${86}</div></td>
+                <td ${s87}><div class="content">${87}</div></td>
+                <td ${s88}><div class="content">${88}</div></td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -14,6 +14,7 @@ public class Unambiguous extends Algorithm {
     public int[][] resolvePuzzle(int[][] sudokuPuzzle) {
         boolean findUnambiguousInPuzzle = true; // if true, try one more time in every cell
         List<Integer> possibleValuesList = new ArrayList<Integer>();
+
         while(findUnambiguousInPuzzle) {
             findUnambiguousInPuzzle = false;
             lapsCount++;
@@ -25,9 +26,11 @@ public class Unambiguous extends Algorithm {
                 }
             }
         }
+
         System.out.println("Number of try: " + tryCount);
         System.out.println("Number of laps: " + lapsCount);
         System.out.println("Number of finding values: " + findingValuesCount);
+
         return sudokuPuzzle;
     }
 }

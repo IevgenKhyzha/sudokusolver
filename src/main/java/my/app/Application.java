@@ -1,12 +1,8 @@
 package my.app;
 
 import my.app.algorithmbeans.Algorithm;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
+import my.app.pojo.ArgsValues;
+import org.apache.commons.cli.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -15,15 +11,16 @@ public class Application {
     public static void main(String[] args) {
         ArgsValues argsValues;
         if (args.length == 0) {
-            argsValues = new ArgsValues("C:\\Users\\yevhe\\Documents\\sudokufiles\\sudoku_5.txt","C:\\Users\\yevhe\\Documents\\sudokufiles\\sudokuout.html", "DFS");//sudoku_in_un_all.txt , sudoku_in_un_1cell,
+            argsValues = new ArgsValues("D:\\DOCUMENTS\\sudokufiles\\sudoku_5.txt",
+                    "D:\\DOCUMENTS\\sudokufiles\\sudokuout.html", "DFS");
         } else {
             argsValues = getValuesFromArgs(args);
         }
 
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext("my.app.configuration");
-        Algorithm algorithmBean = (Algorithm) applicationContext.getBean(argsValues.getAlgorithm());
 
-        new SudokuSolver(argsValues.getInPath(), argsValues.getOutPath(), algorithmBean);
+        new SudokuSolver(argsValues.getInPath(), argsValues.getOutPath(),
+                (Algorithm) applicationContext.getBean(argsValues.getAlgorithm()));
     }
 
     private static ArgsValues getValuesFromArgs(String[] args) {
@@ -44,21 +41,17 @@ public class Application {
         options.addOption(algorithm);
 
         CommandLineParser parser = new DefaultParser();
-        HelpFormatter formatter = new HelpFormatter();
         CommandLine commandLine = null;
 
         try {
             commandLine = parser.parse(options, args);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            formatter.printHelp("utility-name", options);
+            new HelpFormatter().printHelp("utility-name", options);
             System.exit(1);
         }
 
-        String inputFilePath = commandLine.getOptionValue("input");
-        String outputFilePath = commandLine.getOptionValue("output");
-        String algorithmString = commandLine.getOptionValue("algorithm");
-
-        return new ArgsValues(inputFilePath, outputFilePath, algorithmString);
+        return new ArgsValues(commandLine.getOptionValue("input"), commandLine.getOptionValue("output"),
+                commandLine.getOptionValue("algorithm"));
     }
 }

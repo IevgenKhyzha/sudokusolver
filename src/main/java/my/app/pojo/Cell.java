@@ -1,4 +1,4 @@
-package my.app;
+package my.app.pojo;
 
 public class Cell {
 
